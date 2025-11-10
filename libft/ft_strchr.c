@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/14 17:54:48 by jabettin          #+#    #+#             */
+/*   Updated: 2025/10/28 17:10:17 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+char	*ft_strchr(const char *s, int c)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	while (*s != '\0' && *s != (char)c)
+	{
+		s++;
+	}
+	if (*s == (char)c)
+	{
+		return ((char *)s);
+	}
+	return (NULL);
 }

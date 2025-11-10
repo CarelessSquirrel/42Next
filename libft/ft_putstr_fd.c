@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/27 20:38:56 by jabettin          #+#    #+#             */
+/*   Updated: 2025/10/29 02:52:21 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <unistd.h>
 
-int	print_unsigned(unsigned int n)
+void	ft_putstr_fd(char *s, int fd)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	if (!s)
+	{
+		return ;
+	}
+	write(fd, s, ft_strlen(s));
 }

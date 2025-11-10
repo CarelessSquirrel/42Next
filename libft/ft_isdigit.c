@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/28 16:31:50 by jabettin          #+#    #+#             */
+/*   Updated: 2025/11/02 14:11:47 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+int	ft_isdigit(int c)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	return (c >= '0' && c <= '9');
 }

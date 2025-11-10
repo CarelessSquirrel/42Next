@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/11/02 15:08:31 by jabettin          #+#    #+#             */
+/*   Updated: 2025/11/02 16:33:43 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	if (new == NULL)
+	{
+		return ;
+	}
+	if (lst == NULL)
+	{
+		return ;
+	}
+	new->next = *lst;
+	*lst = new;
 }

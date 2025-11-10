@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/28 16:34:21 by jabettin          #+#    #+#             */
+/*   Updated: 2025/10/28 17:02:33 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+void	ft_bzero(void *s, size_t n)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)s;
+	while (n--)
+	{
+		*ptr++ = '\0';
+	}
 }

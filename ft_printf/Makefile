@@ -3,7 +3,7 @@ SRC = ft_printf.c conversions/*.c
 OBJ = $(SRC:.c=.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I.
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)

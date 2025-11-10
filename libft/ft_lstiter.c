@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/11/02 15:19:38 by jabettin          #+#    #+#             */
+/*   Updated: 2025/11/02 16:39:56 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	while (lst != NULL)
+	{
+		if (f != NULL)
+		{
+			f(lst->content);
+		}
+		lst = lst->next;
+	}
 }

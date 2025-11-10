@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/15 18:16:46 by jabettin          #+#    #+#             */
+/*   Updated: 2025/11/02 14:07:44 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdint.h>
 
-int	print_unsigned(unsigned int n)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	size_t			total_size;
+	unsigned char	*p;
+
+	if (nmemb == 0 || size == 0)
+	{
+		return (malloc(1));
+	}
+	if (nmemb > SIZE_MAX / size)
+	{
+		return (NULL);
+	}
+	total_size = nmemb * size;
+	p = malloc(sizeof(*p) * (total_size));
+	if (!p)
+	{
+		return (NULL);
+	}
+	ft_memset(p, 0, total_size);
+	return ((void *)p);
 }

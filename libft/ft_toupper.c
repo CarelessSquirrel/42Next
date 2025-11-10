@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/14 17:43:55 by jabettin          #+#    #+#             */
+/*   Updated: 2025/10/29 03:59:57 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
+#include <stdio.h>
 
-int	print_unsigned(unsigned int n)
+int	ft_toupper(int c)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	if (c >= 'a' && c <= 'z')
+	{
+		c -= 32;
+	}
+	return (c);
 }

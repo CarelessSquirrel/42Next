@@ -1,18 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/14 14:42:01 by jabettin          #+#    #+#             */
+/*   Updated: 2025/10/28 20:08:10 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	unsigned char	*d;
+	unsigned char	*s;
+
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (d == s || n == 0)
+		return (dest);
+	if (d < s)
+	{
+		while (n-- > 0)
+			*d++ = *s++;
+	}
+	else
+	{
+		d = d + n;
+		s = s + n;
+		while (n > 0)
+		{
+			*--d = *--s;
+			n--;
+		}
+	}
+	return (dest);
 }

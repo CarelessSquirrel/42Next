@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_unsigned.c                                   :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/10 18:27:29 by jabettin         ###   ########.fr       */
+/*   Created: 2025/10/15 17:52:25 by jabettin          #+#    #+#             */
+/*   Updated: 2025/11/02 14:06:01 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <stdio.h>
+#include "libft.h"
 
-int	print_unsigned(unsigned int n)
+int	ft_atoi(const char *nptr)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	int	sign;
+	int	result;
+
+	sign = 1;
+	result = 0;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+	{
+		nptr++;
+	}
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+		{
+			sign = -1;
+		}
+		nptr++;
+	}
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		result = result * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (result * sign);
 }
