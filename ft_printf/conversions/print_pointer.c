@@ -9,6 +9,6 @@ int	print_pointer(void *ptr)
 		return write(1, "(nil)", 5);
 	address = (unsigned long)ptr;
 	write(1, "0x", 2);
-	count = 2 + print_unsigned_recursive(address, 16, "0123456789abcdef");
+	count = 2 + ft_putnbr_unsigned(address, 16, "0123456789abcdef");
 	return (count);
 }

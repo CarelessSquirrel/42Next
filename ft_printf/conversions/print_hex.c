@@ -3,7 +3,7 @@
 int print_hex(unsigned int n, int uppercase)
 {
 	if (uppercase)
-		return print_unsigned_recursive(n, 16, "0123456789ABCDEF");
+		return ft_putnbr_unsigned(n, 16, "0123456789ABCDEF");
 	else
-		return print_unsigned_recursive(n, 16, "0123456789abcdef");
+		return ft_putnbr_unsigned(n, 16, "0123456789abcdef");
 }

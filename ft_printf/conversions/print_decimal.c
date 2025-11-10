@@ -13,6 +13,6 @@ int	print_decimal(int n)
 		nb = -nb;
 		count++;
 	}
-	count += print_unsigned_recursive(nb, 10, "0123456789");
+	count += ft_putnbr_unsigned(nb, 10, "0123456789");
 	return (count);
 }

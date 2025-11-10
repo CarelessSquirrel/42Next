@@ -2,5 +2,5 @@
 
 int	print_unsigned(unsigned int n)
 {
-	return print_unsigned_recursive(n, 10, "0123456789");
+	return ft_putnbr_unsigned(n, 10, "0123456789");
 }
