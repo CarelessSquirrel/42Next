@@ -15,6 +15,6 @@ int	print_decimal(int n);
 int	print_unsigned(unsigned int n);
 int	print_hex(unsigned int n, int uppercase);
 
-int	print_unsigned_recursive(unsigned long n, int base, const char *digits);
+int	ft_putnbr_unsigned(unsigned long n, int base, const char *digits);
 
 #endif
