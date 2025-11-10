@@ -7,12 +7,12 @@ int	print_decimal(int n)
 
 	count = 0;
 	nb = n;
-	if(nb < 0)
+	if (nb < 0)
 	{
 		write(1, "-", 1);
 		nb = -nb;
 		count++;
 	}
-	count = count + print_unsigned_recursive(nb, 10, "0123456789");
+	count += print_unsigned_recursive(nb, 10, "0123456789");
 	return (count);
 }

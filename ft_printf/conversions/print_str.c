@@ -1,14 +1,14 @@
-#include "printf.h"
+#include "ft_printf.h"
 
 int	print_str(char *str)
 {
 	int	len;
 
 	len = 0;
-	if (str == '\0')
+	if (str == NULL)
 	{
-		write(1, "null", 4);
-		return (4);
+		write(1, "(null)", 6);
+		return (6);
 	}
 	while (str[len] != '\0')
 	{
