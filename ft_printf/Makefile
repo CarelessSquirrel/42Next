@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-SRC = ft_printf.c conversions/*.c
+SRC = $(wildcard ft_printf.c conversions/*.c)
 OBJ = $(SRC:.c=.o)
 
 CC = cc
