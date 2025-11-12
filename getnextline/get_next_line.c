@@ -6,7 +6,7 @@
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:16:55 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/11 14:50:16 by jabettin         ###   ########.fr       */
+/*   Updated: 2025/11/12 14:07:31 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_next_line(int fd)
 	int	bytes_read;
 	char	*buffer;
 	
-	buffer = malloc(sizeof(char) * 5 + 1);
+	buffer = malloc(sizeof(*buffer) * 5 + 1);
 	if (!buffer)
 	{
 		return NULL;
@@ -28,6 +28,7 @@ char	*get_next_line(int fd)
 	bytes_read = read(fd, buffer, 5);
 	if (bytes_read <= 0)
 	{
+		free(buffer);
 		return NULL;
 	}
 	return buffer;
@@ -41,6 +42,10 @@ int	main(void)
 
 	count = 0;
 	fd = open("example.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		return (1);
+	}
 	while (1)
 	{
 		next_line = get_next_line(fd);
@@ -50,6 +55,7 @@ int	main(void)
 		}
 		count++;
 		printf("%d: %s\n", count, next_line);
+		free(next_line);
 		next_line = NULL;
 	}
 	close (fd);
