@@ -6,7 +6,7 @@
 /*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:16:55 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/12 14:07:31 by jabettin         ###   ########.fr       */
+/*   Updated: 2025/11/21 16:10:17 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,62 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+
+static char	*join_free(char *s1, char *s2)
+{
+	char	*new_str;
+	size_t	len1;
+	size_t	len2;
+
+	len1 = 0;
+	len2 = 0;
+	if (s1)
+		len1 = ft_strlen(s1);
+	if (s2)
+		len2 = ft_strlen(s2);
+	new_str = malloc(sizeof(*new_str) * (len1 + len2 + 1));
+	if (!new_str)
+	{
+		if (s1)
+			free(s1);
+		return (NULL);
+	}
+	if (s1)
+		ft_memcpy(new_str, s1, len1);
+	if (s2)
+		ft_memcpy(new_str + len1, s2, len2);
+	new_str[len1 + len2] = '\0';
+	free(s1);
+	return (new_str);
+}
+
 char	*get_next_line(int fd)
 {
-	int	bytes_read;
-	char	*buffer;
+	static char	*remainder;
+	int			bytes_read;
+	char		*buffer;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	
-	buffer = malloc(sizeof(*buffer) * 5 + 1);
+	
+	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-	{
 		return NULL;
-	}
-	bytes_read = read(fd, buffer, 5);
-	if (bytes_read <= 0)
+	bytes_read = 1;
+	while (!ft_strchr(remainder, '\n') && bytes_read > 0)
 	{
-		free(buffer);
-		return NULL;
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			free(buffer);
+			return NULL;
+		}
+		buffer[bytes_read] = '\0';
+		remainder = join_free(remainder, buffer);
 	}
-	return buffer;
+	
 }
 
 int	main(void)
