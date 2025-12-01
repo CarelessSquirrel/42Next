@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:16:55 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/21 16:10:17 by jabettin         ###   ########.fr       */
+/*   Updated: 2025/12/01 11:05:20 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,59 +44,66 @@ static char	*join_free(char *s1, char *s2)
 	return (new_str);
 }
 
+static char	*update_remainder(char *old, size_t start)
+{
+	char	*new;
+
+	if (old[start] == '\0')
+		return (free(old), NULL);
+	new = ft_substr(old, start, ft_strlen(old) - start);
+	free(old);
+	return (new);
+}
+
+static char	*extract_line(char **remainder)
+{
+	char	*line;
+	char	*nl_ptr;
+	size_t	len;
+
+	if (!*remainder)
+		return (NULL);
+	nl_ptr = ft_strchr(*remainder, '\n');
+	if (nl_ptr)
+	{
+		len = nl_ptr - *remainder + 1;
+		line = ft_substr(*remainder, 0, len);
+		*remainder = update_remainder(*remainder, len);
+		return (line);
+	}
+	line = ft_substr(*remainder, 0, ft_strlen(*remainder));
+	free(*remainder);
+	*remainder = NULL;
+	return (line);
+}
+
+
 char	*get_next_line(int fd)
 {
 	static char	*remainder;
-	int			bytes_read;
 	char		*buffer;
-	char		*line;
+	int			bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	
-	
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return NULL;
+		return (NULL);
 	bytes_read = 1;
-	while (!ft_strchr(remainder, '\n') && bytes_read > 0)
+	while (bytes_read > 0 && (!remainder || !ft_strchr(remainder, '\n')))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(buffer);
-			return NULL;
-		}
+			return (free(buffer), NULL);
 		buffer[bytes_read] = '\0';
 		remainder = join_free(remainder, buffer);
 	}
-	
-}
-
-int	main(void)
-{
-	int fd;
-	char *next_line;
-	int count;
-
-	count = 0;
-	fd = open("example.txt", O_RDONLY);
-	if (fd == -1)
+	free(buffer);
+	if (!remainder || !*remainder)
 	{
-		return (1);
+		free(remainder);
+		remainder = NULL;
+		return (NULL);
 	}
-	while (1)
-	{
-		next_line = get_next_line(fd);
-		if (next_line == NULL)
-		{
-			break;
-		}
-		count++;
-		printf("%d: %s\n", count, next_line);
-		free(next_line);
-		next_line = NULL;
-	}
-	close (fd);
-	return 0;
+	return (extract_line(&remainder));
 }
