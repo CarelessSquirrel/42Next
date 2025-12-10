@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 15:13:41 by jabettin          #+#    #+#             */
-/*   Updated: 2025/12/01 11:16:56 by jbetting         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:41:41 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-
 
 size_t	ft_strlen(const char	*str)
 {
 	size_t	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i] != '\0')
 	{
 		i++;
@@ -31,11 +31,10 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*d;
 	unsigned char	*s;
 
+	if (!dest || !src)
+		return (dest);
 	d = (unsigned char *)dest;
 	s = (unsigned char *)src;
-
-	if (!dest || !src)
-		return (NULL);
 	while (n > 0)
 	{
 		*d = *s;
@@ -43,7 +42,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		s++;
 		n--;
 	}
-	return dest;
+	return (dest);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -63,7 +62,7 @@ char	*ft_strdup(const char *s)
 {
 	char	*dup;
 	size_t	len;
-	
+
 	len = ft_strlen(s);
 	dup = malloc(sizeof(*dup) * (len + 1));
 	if (!dup)
@@ -96,4 +95,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	sub[sub_len] = '\0';
 	return (sub);
 }
-

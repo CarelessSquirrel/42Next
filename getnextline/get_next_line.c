@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:16:55 by jabettin          #+#    #+#             */
-/*   Updated: 2025/12/01 11:05:20 by jbetting         ###   ########.fr       */
+/*   Updated: 2025/12/10 17:40:54 by jabettin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
 
 static char	*join_free(char *s1, char *s2)
 {
@@ -31,9 +27,7 @@ static char	*join_free(char *s1, char *s2)
 	new_str = malloc(sizeof(*new_str) * (len1 + len2 + 1));
 	if (!new_str)
 	{
-		if (s1)
-			free(s1);
-		return (NULL);
+		return (free(s1), NULL);
 	}
 	if (s1)
 		ft_memcpy(new_str, s1, len1);
@@ -77,12 +71,11 @@ static char	*extract_line(char **remainder)
 	return (line);
 }
 
-
 char	*get_next_line(int fd)
 {
 	static char	*remainder;
 	char		*buffer;
-	int			bytes_read;
+	ssize_t		bytes_read;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -94,16 +87,14 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(buffer), NULL);
+			return (free(buffer), free(remainder), remainder = NULL, NULL);
 		buffer[bytes_read] = '\0';
 		remainder = join_free(remainder, buffer);
+		if (!remainder)
+			return (free(buffer), remainder = NULL, NULL);
 	}
 	free(buffer);
 	if (!remainder || !*remainder)
-	{
-		free(remainder);
-		remainder = NULL;
-		return (NULL);
-	}
+		return (free(remainder), remainder = NULL, NULL);
 	return (extract_line(&remainder));
 }
