@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:46:48 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/02 19:25:00 by jabettin         ###   ########.fr       */
+/*   Updated: 2025/12/12 04:32:18 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
-static	int	count_len(int n)
+static int	count_len(int n)
 {
 	int		len;
 	long	num;
@@ -24,9 +23,7 @@ static	int	count_len(int n)
 	len = 0;
 	num = n;
 	if (num <= 0)
-	{
 		len++;
-	}
 	while (num != 0)
 	{
 		num = num / 10;
@@ -60,9 +57,7 @@ char	*ft_itoa(int n)
 	i = 0;
 	str = malloc(sizeof(*str) * (len + 1));
 	if (!str)
-	{
 		return (NULL);
-	}
 	if (num < 0)
 	{
 		str[i] = '-';
@@ -74,7 +69,7 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-int main(void)
+int	main(void)
 {
 	int i = -7 / 10;
 	printf("SizeOf:_%d\n", i);

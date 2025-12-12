@@ -6,7 +6,7 @@
 /*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:27:28 by jabettin          #+#    #+#             */
-/*   Updated: 2025/11/25 11:21:06 by jbetting         ###   ########.fr       */
+/*   Updated: 2025/12/12 04:23:03 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	print_unsigned(unsigned int n)
 {
-	return ft_putnbr_unsigned(n, 10, "0123456789");
+	return (ft_putnbr_unsigned(n, 10, "0123456789"));
 }
