@@ -6,22 +6,18 @@ GNL is a program that should "split" sentences in a text file when it finds a de
 In the case of GNL, this delimiter is the newline character.
 The sentences after finding a newline will be split underneath one another, just like in regular writing.
 It does so by looping through the entire array looking for the provided delimiter, which in this case has been set to be the newline character.
-## End of description ##
+
 
 ## Instructions
 The compiling will happen with the three standard flags, -Wall -Wextra -Werror and is typed as follows:
 `cc -Werror -Wall -Wextra ./main.c ./get_next_line.c ./get_next_line_utils.c -D BUFFER_SIZE=4 -o test`
 After which it can be ran using **./test**.
-## End of instructions ##
+
 
 ## Resources ##
-For this project i used the blueprint layed out by LAnnur-s from the website Medium.
+For this project i used the information by LAnnur-s from the website Medium.
 `https://medium.com/@lannur-s/gnl-c3cff1ee552b`
 I also used valgrind and francinette for testing purposes, and to look for any memory leaks.
-Furthermore, i used AI to write the steps and or "flow" of GNL in this Readme.md, aswell as the Key concepts which you can find below.
-It follows the exact steps, or "flow" of GNL.
-I also used AI to help me find efficient solutions for the skeleton of this project.
-## End of resources ##
 
 
 
@@ -113,7 +109,7 @@ You call `get_next_line(fd)` for the first time:
 
 
 
-### Key Concepts ##
+### Key concepts/syntax of this GNL project ##
 
 * **`buffer`**: Temporary array where each chunk of the file is read. Freed after each iteration.
 * **`remainder`**: Persistent storage across calls, holds data that was read but not yet returned as a line.
