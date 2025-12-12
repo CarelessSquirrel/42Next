@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jabettin <jabettin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbetting <jbetting@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:16:55 by jabettin          #+#    #+#             */
-/*   Updated: 2025/12/10 17:40:54 by jabettin         ###   ########.fr       */
+/*   Updated: 2025/12/12 02:14:39 by jbetting         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ static char	*extract_line(char **remainder)
 		len = nl_ptr - *remainder + 1;
 		line = ft_substr(*remainder, 0, len);
 		*remainder = update_remainder(*remainder, len);
-		return (line);
+		return (free(line), line);
+		//return (line);
+		//free(line);
 	}
 	line = ft_substr(*remainder, 0, ft_strlen(*remainder));
 	free(*remainder);
