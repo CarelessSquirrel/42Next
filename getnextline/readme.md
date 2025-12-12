@@ -18,6 +18,7 @@ After which it can be ran using **./test**.
 For this project i used the information by LAnnur-s from the website Medium.
 `https://medium.com/@lannur-s/gnl-c3cff1ee552b`
 I also used valgrind and francinette for testing purposes, and to look for any memory leaks.
+Furthermore, i used AI to write the flow of my GNL down below, and i must admit, it did a pretty good job of explaining the flow of my GNL.
 
 
 
