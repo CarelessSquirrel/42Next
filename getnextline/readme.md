@@ -24,7 +24,7 @@ Furthermore, i used AI to write the flow of my GNL down below, and i must admit,
 
 
 
-You call `get_next_line(fd)` for the first time:
+You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n42:
 
 1. **Initial Setup**
 
