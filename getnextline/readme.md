@@ -12,13 +12,14 @@ It does so by looping through the entire array looking for the provided delimite
 The compiling will happen with the three standard flags, -Wall -Wextra -Werror and is typed as follows:
 `cc -Werror -Wall -Wextra ./main.c ./get_next_line.c ./get_next_line_utils.c -D BUFFER_SIZE=4 -o test`
 After which it can be ran using **./test**.
+**Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test** 
 
 
 ## Resources ##
 For this project i used the information by LAnnur-s from the website Medium.
 `https://medium.com/@lannur-s/gnl-c3cff1ee552b`
 I also used valgrind and francinette for testing purposes, and to look for any memory leaks.
-Furthermore, i used AI to write the flow of my GNL down below, and i must admit, it did a pretty good job of explaining the flow of my GNL.
+Furthermore, i used AI to write the flow of my GNL down below, and i must admit, it did a pretty good job of explaining the flow of GNL.
 
 
 
