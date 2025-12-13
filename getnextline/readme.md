@@ -111,7 +111,7 @@ You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n4
 
 
 
-### Key concepts/syntax of this GNL project ##
+## Key concepts/syntax of this GNL project ##
 
 * **`buffer`**: Temporary array where each chunk of the file is read. Freed after each iteration.
 * **`remainder`**: Persistent storage across calls, holds data that was read but not yet returned as a line.
@@ -120,5 +120,5 @@ You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n4
 * **`update_remainder`**: Removes the extracted part from `remainder`.
 * **Static `remainder`**: Enables `get_next_line` to “remember” leftover data between multiple calls.
 
-
+---
 **`Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test`**
