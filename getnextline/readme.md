@@ -1,4 +1,4 @@
-`This project has been created as a part of the 42 curriculum by: jabettin.`
+`This project has been created as a part of the 42 curriculum by:` <jabettin>.
 
 
 ## Description ##
@@ -8,11 +8,11 @@ The sentences after finding a newline will be split underneath one another, just
 It does so by looping through the entire array looking for the provided delimiter, which in this case has been set to be the newline character.
 
 
-## Instructions
+## Instructions ##
 The compiling will happen with the three standard flags, -Wall -Wextra -Werror and is typed as follows:
 `cc -Werror -Wall -Wextra ./main.c ./get_next_line.c ./get_next_line_utils.c -D BUFFER_SIZE=4 -o test`
 After which it can be ran using **./test**.
-**Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test** 
+
 
 
 ## Resources ##
@@ -120,3 +120,5 @@ You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n4
 * **`update_remainder`**: Removes the extracted part from `remainder`.
 * **Static `remainder`**: Enables `get_next_line` to “remember” leftover data between multiple calls.
 
+
+**Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test**
