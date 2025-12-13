@@ -2,7 +2,7 @@
 
 
 ## Description ##
-ft_printf as a program, should- almost exactly replicate the behavior of printf from the standard input, output library, or just: <stdio.h>. With a few exceptions, which are stated in the subject file of ft_printf.
+ft_printf as a program, should- almost exactly replicate the behavior of printf from the standard input, output library, or just: <stdio.h>. With a few exceptions, which are stated in the subject file of ft_printf. This ft_printf does **NOT** include the bonus excercise
 Printf at its core, could be simply summarized as follows: printf works by iterating over the format string character by character. When a `%` character is encountered, it signals the start of a format instruction. The character following % is interpreted as a `format specifier`, which determines how the next argument from the `variadic argument list` should be processed and printed. For example: *`%s`*, *`%d`*. All other characters are printed directly to the standard output
 
 

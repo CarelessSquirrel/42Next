@@ -6,6 +6,7 @@ GNL is a function that reads from a file descriptor and returns one line at a ti
 It continuously reads input in chunks of `BUFFER_SIZE` until a `newline character` or *`\n`* is found or when `EOF` (End-Of-File) is reached.
 When GNL encounters a newline character, the function extracts the line up to and including that newline character, and stores the remaining data for the next function call.
 So, on every new call to `get_next_line`, the function resumes reading from the remaining stored data and stops only when the EOF is reached and the buffer no longer contains any characters.
+This GNL does **NOT** contain the bonus excercise
 
 
 ## Instructions ##
