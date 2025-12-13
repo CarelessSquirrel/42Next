@@ -24,8 +24,6 @@ Aswell as AI to write the flow of my ft_printf down below.
 
 
 
-
-
 ## Flow of ft_printf ##
 
 You call 
