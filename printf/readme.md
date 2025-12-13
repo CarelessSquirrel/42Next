@@ -24,6 +24,7 @@ Aswell as AI to write the flow of my ft_printf down below.
 
 
 
+## Flow of ft_printf ##
 
 
 ## Key concepts/syntax of this ft_printf project ##
