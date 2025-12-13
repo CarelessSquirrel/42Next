@@ -23,7 +23,10 @@ Aswell as the Wikipedia page on the standard C library function printf from: `ht
 Aswell as AI to write the flow of my ft_printf down below.
 
 
+
+
+
 ## Key concepts/syntax of this ft_printf project ##
 
 
-**Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): main.c, test**
+**`Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): main.c, test`**

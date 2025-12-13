@@ -23,8 +23,7 @@ Furthermore, i used AI to write the flow of my GNL down below, and i must admit,
 
 
 
-
-
+## Flow of GNL ##
 You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n42":
 
 1. **Initial Setup**
@@ -121,4 +120,4 @@ You call `get_next_line(fd)` for the first time with the string "Hello\nWorld\n4
 * **Static `remainder`**: Enables `get_next_line` to “remember” leftover data between multiple calls.
 
 
-**Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test**
+**`Be aware of the fact that, before turning this code in, you might, or will have to remove one of the following file(s): example.txt, main.c, test`**
