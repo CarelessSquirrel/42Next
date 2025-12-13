@@ -130,8 +130,8 @@ Final output: Hello world, number: 42, hex: 2a
 
 ## Key concepts / syntax of this ft_printf project ##
 
-* **`format` string**: The template string that controls output. Regular characters are printed directly, `%` introduces a conversion.
-* **`va_list args`**: Holds the variadic arguments passed to `ft_printf`. Arguments are consumed in order using `va_arg`.
+* **`format string`**: The template string that controls output. Regular characters are printed directly, `%` introduces a conversion.
+* **`va_list args`**: Holds the `variadic arguments` passed to `ft_printf`. Arguments are consumed in order using `va_arg`.
 * **`%` specifier**: Signals that the next character determines how the next argument should be printed.
 * **`handle_conversion`**: Dispatches the correct print function based on the format specifier (`c`, `s`, `d`, `x`, etc.).
 * **Conversion functions** (`print_str`, `print_decimal`, `print_hex`, …): Each handles a specific data type and returns the number of characters written.
