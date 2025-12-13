@@ -3,8 +3,7 @@
 
 ## Description ##
 ft_printf as a program, should- almost exactly replicate the behavior of printf from the standard input, output library, or just: <stdio.h>. With a few exceptions, which are stated in the subject file of ft_printf.
-Printf's functionality at it's core could simply be summarized as follows: We want to keep looping through the format string until we find a delimiter. 
-In the case of printf, this delimiter is the `'%'`. When this delimiter is found, the next step is to read one index past the delimiter, to identify the `format specifier`. The format specifier tells printf what datatype the user wants being printed. i.e: *`%s`* or *`%i`*.
+Printf at its core, could be simply summarized as follows: printf works by iterating over the format string character by character. When a `%` character is encountered, it signals the start of a format instruction. The character following % is interpreted as a `format specifier`, which determines how the next argument from the `variadic argument list` should be processed and printed. For example: *`%s`*, *`%d`*. All other characters are printed directly to the standard output
 
 
 ## Instructions ##

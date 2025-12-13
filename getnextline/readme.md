@@ -2,10 +2,10 @@
 
 
 ## Description ##
-GNL is a program that should "split" sentences in a text file when it finds a delimiter.
-In the case of GNL, this delimiter is the newline character.
-The sentences after finding a newline will be split underneath one another, just like in regular writing.
-It does so by looping through the entire array looking for the provided delimiter, which in this case has been set to be the newline character.
+GNL is a function that reads from a file descriptor and returns one line at a time.
+It continuously reads input in chunks of `BUFFER_SIZE` until a `newline character` or *`\n`* is found or when `EOF` (End-Of-File) is reached.
+When GNL encounters a newline character, the function extracts the line up to and including that newline character, and stores the remaining data for the next function call.
+So, on every new call to `get_next_line`, the function resumes reading from the remaining stored data and stops only when the EOF is reached and the buffer no longer contains any characters.
 
 
 ## Instructions ##
