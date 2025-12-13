@@ -1,4 +1,4 @@
-`This project has been created as a part of the 42 curriculum by:` <jabettin>.
+<This project has been created as a part of the 42 curriculum by: jabettin
 
 
 ## Description ##
@@ -19,7 +19,7 @@ If you also want to clean that file make sure to use the following command: `mak
 
 
 ## Resources ##
-For this project i used information from the Gitbook posted by <Laura> from: `https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf`
+For this project i used information from the Gitbook posted by <Laura from: `https://42-cursus.gitbook.io/guide/1-rank-01/ft_printf`
 Aswell as the Wikipedia page on the standard C library function printf from: `https://en.wikipedia.org/wiki/Printf`
 Aswell as AI to write the flow of my ft_printf down below.
 
