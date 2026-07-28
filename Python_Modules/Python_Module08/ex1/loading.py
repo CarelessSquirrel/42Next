@@ -1,7 +1,12 @@
 #!/usr/bin/env python3
 
+from __future__ import annotations
 import sys
 import importlib
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 def import_handler() -> dict:
@@ -9,6 +14,7 @@ def import_handler() -> dict:
     packages = [
         "pandas",
         "numpy",
+        "matplotlib",
         "matplotlib.pyplot",
         "requests"
     ]
@@ -62,23 +68,83 @@ def get_dataset(modules: dict) -> list | None:
     if data is not None:
         return data
     print("Falling back to simulated data..")
-    fallback_data_gen(modules)
+    return fallback_data_gen(modules)
 
 
-def data_modification(modules: dict, data: list[dict]) -> list | None:
+def data_modification(modules: dict, data: list[dict]) -> pd.DataFrame | None:
     panda_module = modules.get("pandas")
     if panda_module is None:
         print("pandas unavailable, unavailable to modify data")
-        return
+        return None
     try:
         df = panda_module.json_normalize(data)
         df.sort_values(by="value", ascending=False)
         df.head(10)
         df.rename(columns={"country.value":"country", "value":"population"})
+    except KeyError as e:
+        print(f"Expected column missing from data: {e}")
+        return None
+    return df
 
 
-def matrix():
-    ...
+DESCRIPTIONS = {
+    "pandas": "Data manipulation ready",
+    "numpy": "Numerical computation ready",
+    "requests": "Network access ready",
+    "matplotlib": "Visualization ready",
+}
+
+
+def print_dependency_report(modules: dict) -> None:
+    print("Checking dependencies:")
+    for name, description in DESCRIPTIONS.items():
+        mod = modules.get(name)
+        if mod is None:
+            print(f"[MISSING] {name} - not installed")
+        else:
+            version = getattr(mod, "__version__", "unknown")
+            print(f"[OK] {name} ({version}) - {description}")
+
+
+def visualize_data(modules: dict, df: pd.DataFrame) -> bool:
+    plt_module = modules.get("matplotlib.pyplot")
+    if plt_module is None:
+        print("matplotlib unavailable, unable to generate visualization")
+        return False
+    plt_module.figure(figsize=(10, 6))
+    plt_module.bar(df["country"], df["population"])
+    plt_module.xlabel("Country")
+    plt_module.ylabel("Population")
+    plt_module.title("Matrix Data Analysis: Top 10 Most Populous Countries")
+    plt_module.xticks(rotation=45, ha="right")
+    plt_module.tight_layout()
+    plt_module.savefig("matrix_analysis.png")
+    return True
+
+
+def matrix() -> None:
+    print("LOADING STATUS: Loading programs...")
+    print()
+    modules = import_handler()
+    print_dependency_report(modules)
+    print()
+
+    print("Analyzing Matrix data...")
+    data = get_dataset(modules)
+    if data is None:
+        print("No data available - all sources failed")
+        return
+    print(f"Processing {len(data)} data points...")
+
+    df = data_modification(modules, data)
+    if df is None:
+        print("Unable to process data")
+        return
+
+    print("Generating visualization...")
+    if visualize_data(modules, df):
+        print("Analysis complete!")
+        print("Results saved to: matrix_analysis.png")
 
 
 if __name__ == '__main__':
