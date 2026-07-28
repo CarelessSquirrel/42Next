@@ -72,8 +72,10 @@ def data_modification(modules: dict, data: list[dict]) -> list | None:
         return
     try:
         df = panda_module.json_normalize(data)
-        df.sort_values(by="country.value", ascending=False)
-        df.describe()
+        df.sort_values(by="value", ascending=False)
+        df.head(10)
+        df.rename(columns={"country.value":"country", "value":"population"})
+
 
 def matrix():
     ...
