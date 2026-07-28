@@ -78,9 +78,9 @@ def data_modification(modules: dict, data: list[dict]) -> pd.DataFrame | None:
         return None
     try:
         df = panda_module.json_normalize(data)
-        df.sort_values(by="value", ascending=False)
-        df.head(10)
-        df.rename(columns={"country.value":"country", "value":"population"})
+        df = df.sort_values(by="value", ascending=False)
+        df = df.head(10)
+        df = df.rename(columns={"country.value":"country", "value":"population"})
     except KeyError as e:
         print(f"Expected column missing from data: {e}")
         return None
