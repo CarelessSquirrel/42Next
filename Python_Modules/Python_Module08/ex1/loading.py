@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 from __future__ import annotations
-import sys
 import importlib
 from typing import TYPE_CHECKING
+import os
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -31,18 +31,22 @@ def api_call(modules: dict) -> list | None:
     requests_module = modules.get("requests")
     if requests_module is None:
         print("requests unavailable, unable to fetch data")
-        return
+        return None
+    url = (
+        "https://api.worldbank.org/v2/country/all/indicator/"
+        "SP.POP.TOTL?format=json&per_page=300&date=2022"
+    )
     try:
-        r = requests_module.get("https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&per_page=300&date=2022")
+        r = requests_module.get(url)
         r.raise_for_status()
         data = r.json()
     except requests_module.exceptions.RequestException as e:
         print(f"Your API request has failed: {e}")
-        return
+        return None
     return data[1]
 
 
-def fallback_data_gen(modules: dict) -> list:
+def fallback_data_gen(modules: dict) -> list | None:
     numpy_module = modules.get("numpy")
     if numpy_module is None:
         print("numpy unavailable, unable to generate fallback data")
@@ -56,7 +60,9 @@ def fallback_data_gen(modules: dict) -> list:
         "Switzerland",
         "Poland"
     ]
-    populations = numpy_module.random.randint(100_000, 1_500_000_000, size=len(country_names))
+    populations = numpy_module.random.randint(
+        100_000, 1_500_000_000, size=len(country_names)
+    )
     fallback = []
     for name, pop in zip(country_names, populations):
         fallback.append({"country": {"value": name}, "value": int(pop)})
@@ -80,7 +86,9 @@ def data_modification(modules: dict, data: list[dict]) -> pd.DataFrame | None:
         df = panda_module.json_normalize(data)
         df = df.sort_values(by="value", ascending=False)
         df = df.head(10)
-        df = df.rename(columns={"country.value":"country", "value":"population"})
+        df = df.rename(
+            columns={"country.value": "country", "value": "population"}
+        )
     except KeyError as e:
         print(f"Expected column missing from data: {e}")
         return None
@@ -118,8 +126,24 @@ def visualize_data(modules: dict, df: pd.DataFrame) -> bool:
     plt_module.title("Matrix Data Analysis: Top 10 Most Populous Countries")
     plt_module.xticks(rotation=45, ha="right")
     plt_module.tight_layout()
-    plt_module.savefig("matrix_analysis.png")
+    output_path = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), "matrix_analysis.png"
+    )
+    plt_module.savefig(output_path)
     return True
+
+
+def print_dependency_management_comparison() -> None:
+    print("Dependency management comparison:")
+    print("  pip + requirements.txt:")
+    print("    - flat list, exact pins (e.g. pandas==2.3.3)")
+    print("    - install with: pip install -r requirements.txt")
+    print("    - no built-in lock file; you manage the venv yourself")
+    print("  Poetry + pyproject.toml:")
+    print("    - structured, flexible constraints (e.g. pandas = \"^2.3.3\")")
+    print("    - install with: poetry install")
+    print("    - auto-generates poetry.lock (exact resolved versions)")
+    print("    - manages its own venv automatically")
 
 
 def matrix() -> None:
@@ -127,6 +151,8 @@ def matrix() -> None:
     print()
     modules = import_handler()
     print_dependency_report(modules)
+    print()
+    print_dependency_management_comparison()
     print()
 
     print("Analyzing Matrix data...")
