@@ -41,7 +41,9 @@ def security_check(config: dict) -> str:
 
 
 def oracle() -> None:
-    
-
+    print("ORACLE STATUS: Reading the Matrix...")
+    print()
+    loaded_config = load_configuration()
+    print(format_configuration(loaded_config))
 if __name__ == '__main__':
     oracle()
