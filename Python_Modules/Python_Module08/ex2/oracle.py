@@ -20,7 +20,7 @@ def format_configuration(config: dict) -> str:
     api_status = "Authenticated" if config["API_KEY"] else "Not authenticated"
     zion_status = "Online" if config["ZION_ENDPOINT"] else "Offline"
     return (
-        "Configuration loaded\n"
+        "Configuration loaded:\n"
         f"Mode: {config['MATRIX_MODE']}\n"
         f"Database: {database_status}\n"
         f"API Access: {api_status}\n"
@@ -45,5 +45,18 @@ def oracle() -> None:
     print()
     loaded_config = load_configuration()
     print(format_configuration(loaded_config))
+    print()
+    print(security_check(loaded_config))
+    print()
+    missing = [
+        key for key in ("DATABASE_URL", "API_KEY", "ZION_ENDPOINT")
+        if loaded_config[key] is None
+    ]
+    if missing:
+        print(f"WARNING: Missing configuration for: {', '.join(missing)}")
+    else:
+        print("The Oracle sees all configurations.")
+
+
 if __name__ == '__main__':
     oracle()
