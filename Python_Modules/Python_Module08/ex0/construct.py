@@ -20,7 +20,7 @@ def path_status(venv_active: bool) -> str:
         return (
             f"Current Python: {sys.executable}\n"
             f"Virtual Environment: {os.path.basename(sys.prefix)}\n"
-            f"Environment path: {sys.prefix}\n"
+            f"Environment Path: {sys.prefix}\n"
         )
     else:
         return (
@@ -44,7 +44,7 @@ def matrix_instructions(venv_active: bool) -> str:
             "To enter the construct, run:\n"
             "python -m venv matrix_env\n"
             "source matrix_env/bin/activate # On Unix\n"
-            r"matrix_env\scripts\activate # On Windows"
+            r"matrix_env\Scripts\activate # On Windows"
             "\n\n"
             "Then run this program again"
         )
@@ -60,7 +60,7 @@ def matrix_message(venv_active: bool) -> str:
     else:
         return (
             "WARNING: You're in the global environment!\n"
-            "The machines can see everything you install\n"
+            "The machines can see everything you install.\n"
         )
 
 

@@ -1,3 +1,4 @@
 matrix_env
 matrix_analysis.png
 .env
+.mypy_cache

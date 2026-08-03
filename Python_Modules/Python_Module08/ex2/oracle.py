@@ -16,21 +16,26 @@ def load_configuration() -> dict:
 
 
 def format_configuration(config: dict) -> str:
-    database_status = "Connected to local instance" if config["DATABASE_URL"] else "Not configured"
-    api_status = "Authenticated" if config["API_KEY"] else "Not authenticated"
+    database_status = (
+        "Connected to local instance"
+        if config["DATABASE_URL"] else "Not configured"
+    )
+    api_status = (
+        "Authenticated" if config["API_KEY"] else "Not authenticated"
+    )
     zion_status = "Online" if config["ZION_ENDPOINT"] else "Offline"
     return (
         "Configuration loaded:\n"
         f"Mode: {config['MATRIX_MODE']}\n"
         f"Database: {database_status}\n"
         f"API Access: {api_status}\n"
-        f"Log level: {config['LOG_LEVEL']}\n"
+        f"Log Level: {config['LOG_LEVEL']}\n"
         f"Zion Network: {zion_status}"
     )
 
 
 def security_check(config: dict) -> str:
-    lines = ["Environment security check: "]
+    lines = ["Environment security check:"]
     lines.append("[OK] No hardcoded secrets detected")
     if config["_env_loaded"]:
         lines.append("[OK] .env file properly configured")
