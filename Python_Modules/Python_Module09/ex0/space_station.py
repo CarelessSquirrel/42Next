@@ -49,7 +49,9 @@ def main() -> None:
             oxygen_level=40.0,
             last_maintenance=datetime.fromisoformat("2024-01-15T08:30:00"),
         )
-        except ValidationError as e:
-            print(e.errors()[0]["msg"])
+    except ValidationError as e:
+        print(e.errors()[0]["msg"])
+
+
 if __name__ == '__main__':
     main()
