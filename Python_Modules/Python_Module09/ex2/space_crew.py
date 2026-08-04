@@ -58,4 +58,43 @@ class SpaceMission(BaseModel):
 def main() -> None:
     print("Space Mission Crew validation")
     print("=" * 40)
-    valid
+    valid_mission = SpaceMission(
+        mission_id="M2024_MARS",
+        mission_name="Mars Colony Establishment",
+        destination="Mars",
+        launch_date=datetime.fromisoformat("2024-11-01T09:00:00"),
+        duration_days=900,
+        budget_millions=2500.0,
+        crew=[
+            CrewMember(
+                member_id="CM001",
+                name="Sarah",
+                rank=Rank.COMMANDER,
+                age=42,
+                specialization="Mission lead",
+                years_experience=15,
+            ),
+            CrewMember(
+                member_id="CM002",
+                name="John",
+                rank=Rank.CADET,
+                age=24,
+                specialization="Engineer",
+                years_experience=5,
+            ),
+            CrewMember(
+                member_id="CM003",
+                name="Lydia",
+                rank=Rank.CAPTAIN,
+                age=50,
+                specialization="Captain",
+                years_experience=20,
+            ),
+        ],
+    )
+    print("Valid mission created:")
+    print(f"Mission: {valid_mission.mission_name}")
+    print(f"ID: {valid_mission.mission_id}")
+    print(f"Destination: {valid_mission.destination}")
+    print(f"Duration: {valid_mission.duration_days} days")
+    print(f"")
