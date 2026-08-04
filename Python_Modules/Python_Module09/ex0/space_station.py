@@ -17,3 +17,18 @@ class SpaceStation(BaseModel):
     notes: Optional[str] = Field(default=None, max_length=200)
 
 
+def main() -> None:
+    print("Space Station Data Validation")
+    print("=" * 40)
+    valid_station = SpaceStation(
+        station_id="ISS001",
+        name="International Space Station",
+        crew_size="6",
+        power_level=85.5,
+        oxygen_level=92.3,
+        last_maintenance=datetime.fromisoformat("2024-01-15T08:30:00"),
+        notes="routine maintenance completed",
+    )
+
+    print("Valid station created:")
+    print(f"ID: {valid_station.station_id}")
