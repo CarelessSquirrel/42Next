@@ -32,3 +32,8 @@ def main() -> None:
 
     print("Valid station created:")
     print(f"ID: {valid_station.station_id}")
+    print(f"Name: {valid_station.name}")
+    print(f"Crew: {valid_station.crew_size}")
+    print(f"Power: {valid_station.power_level}")
+    print(f"Oxygen: {valid_station.oxygen_level}")
+    print()
