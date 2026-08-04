@@ -54,4 +54,25 @@ def main() -> None:
     print(f"ID: {valid_contact.contact_id}")
     print(f"Type: {valid_contact.contact_type.value}")
     print(f"Location: {valid_contact.location}")
-    print
+    print(f"Signal: {valid_contact.signal_strength}/10")
+    print(f"Duration: {valid_contact.duration_minutes} minutes")
+    print(f"Witnesses: {valid_contact.witness_count}")
+    print(f"Message: '{valid_contact.message_received}'")
+    print("=" * 40)
+    print("Expected validation error:")
+    try:
+        AlienContact(
+            contact_id="AC_2024_002",
+            timestamp=datetime.fromisoformat("2024-03-11T03:00:00"),
+            location="Roswell, New Mexico",
+            contact_type=ContactType.TELEPATHIC,
+            signal_strength=6.0,
+            duration_minutes=20,
+            witness_count=1,
+        )
+    except ValidationError as e:
+        print(e.errors()[0]["msg"])
+
+
+if name == '__main__':
+    main()
