@@ -41,7 +41,7 @@ def main() -> None:
     print("Alien Contact Log Validation")
     print("=" * 40)
     valid_contact = AlienContact(
-        contact_id"AC_2024_001",
+        contact_id="AC_2024_001",
         timestamp=datetime.fromisoformat("2024-03-10T22:15:00"),
         location="Area 51, Nevada",
         contact_type=ContactType.RADIO,
@@ -58,7 +58,7 @@ def main() -> None:
     print(f"Duration: {valid_contact.duration_minutes} minutes")
     print(f"Witnesses: {valid_contact.witness_count}")
     print(f"Message: '{valid_contact.message_received}'")
-    print("=" * 40)
+    print("\n" + '=' * 40)
     print("Expected validation error:")
     try:
         AlienContact(
@@ -74,5 +74,5 @@ def main() -> None:
         print(e.errors()[0]["msg"])
 
 
-if name == '__main__':
+if __name__ == '__main__':
     main()
