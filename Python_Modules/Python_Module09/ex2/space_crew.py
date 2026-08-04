@@ -25,4 +25,23 @@ class CrewMember(BaseModel):
 
 
 class SpaceMission(BaseModel):
-    mission
+    mission_id: str = Field(..., min_length=5, max_length=15)
+    mission_name: str = Field(..., min_length=3, max_length=100)
+    destination: str = Field(..., min_length=3, max_length=50)
+    launch_date: datetime
+    duration_days: int = Field(..., ge=1, le=3650)
+    crew: List[CrewMember] = Field(..., min_length=1, max_length=12)
+    mission_status: str = "planned"
+    budget_millions: float = Field(..., ge=1.0, le=10000.0)
+
+    @model_validator(mode="after")
+    def check_mission_safety(self) -> "SpaceMission":
+        if not self.mission_id.startswith("M"):
+            raise ValueError("Mission ID must start with 'M'")
+        command_ranks = {Rank.COMMANDER, Rank.CAPTAIN}
+        if not any(member.rank in command_ranks for member in self.crew):
+            raise ValueError("Mission must have atleast one Commander or Captain")
+        if self.duration_days > 365:
+            experienced = sum(
+                1 for member in self.crew if member.years_experience >= 5
+            )
