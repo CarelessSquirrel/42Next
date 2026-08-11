@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
+import json
 from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel, model_validator, Field, ValidationError
 from enum import Enum
+from pathlib import Path
+from typing import Optional
+
+from pydantic import BaseModel, Field, ValidationError, model_validator
 
 
 class ContactType(str, Enum):
@@ -30,49 +33,54 @@ class AlienContact(BaseModel):
             raise ValueError("Contact ID must start with 'AC'")
         if self.contact_type == ContactType.PHYSICAL and not self.is_verified:
             raise ValueError("Physical contact reports must be verified")
-        if self.contact_type == ContactType.TELEPATHIC and self.witness_count < 3:
-            raise ValueError("Telepathic contact requires atleast 3 witnesses")
+        if (
+            self.contact_type == ContactType.TELEPATHIC
+            and self.witness_count < 3
+        ):
+            raise ValueError(
+                "Telepathic contact requires at least 3 witnesses"
+            )
         if self.signal_strength > 7.0 and not self.message_received:
-            raise ValueError("Strong signals (>7.0) should include received messages")
+            raise ValueError(
+                "Strong signals (> 7.0) should include received messages"
+            )
         return self
 
 
 def main() -> None:
     print("Alien Contact Log Validation")
     print("=" * 40)
-    valid_contact = AlienContact(
-        contact_id="AC_2024_001",
-        timestamp=datetime.fromisoformat("2024-03-10T22:15:00"),
-        location="Area 51, Nevada",
-        contact_type=ContactType.RADIO,
-        signal_strength=8.5,
-        duration_minutes=45,
-        witness_count=5,
-        message_received="Greetings from Zeta Reticulli",
-    )
+    data_dir = Path(__file__).parent.parent / "generated_data"
+
+    with open(data_dir / "alien_contacts.json") as f:
+        records = json.load(f)
+    for record in records:
+        try:
+            contact = AlienContact(**record)
+            break
+        except ValidationError:
+            continue
     print("Valid contact report:")
-    print(f"ID: {valid_contact.contact_id}")
-    print(f"Type: {valid_contact.contact_type.value}")
-    print(f"Location: {valid_contact.location}")
-    print(f"Signal: {valid_contact.signal_strength}/10")
-    print(f"Duration: {valid_contact.duration_minutes} minutes")
-    print(f"Witnesses: {valid_contact.witness_count}")
-    print(f"Message: '{valid_contact.message_received}'")
-    print("\n" + '=' * 40)
+    print(f"ID: {contact.contact_id}")
+    print(f"Type: {contact.contact_type.value}")
+    print(f"Location: {contact.location}")
+    print(f"Signal: {contact.signal_strength}/10")
+    print(f"Duration: {contact.duration_minutes} minutes")
+    print(f"Witnesses: {contact.witness_count}")
+    print(f"Message: '{contact.message_received}'")
+
+    print("\n" + "=" * 40)
+    with open(data_dir / "invalid_contacts.json") as f:
+        invalid_records = json.load(f)
     print("Expected validation error:")
-    try:
-        AlienContact(
-            contact_id="AC_2024_002",
-            timestamp=datetime.fromisoformat("2024-03-11T03:00:00"),
-            location="Roswell, New Mexico",
-            contact_type=ContactType.TELEPATHIC,
-            signal_strength=6.0,
-            duration_minutes=20,
-            witness_count=1,
-        )
-    except ValidationError as e:
-        print(e.errors()[0]["msg"])
+    for bad_record in invalid_records:
+        try:
+            AlienContact(**bad_record)
+        except ValidationError as e:
+            for err in e.errors():
+                field = err["loc"][0] if err["loc"] else "model"
+                print(f"{field}: {err['msg']}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

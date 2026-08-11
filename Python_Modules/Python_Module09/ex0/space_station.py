@@ -2,7 +2,8 @@
 
 from datetime import datetime
 from typing import Optional
-
+from pathlib import Path
+import json
 from pydantic import BaseModel, Field, ValidationError
 
 
@@ -20,38 +21,36 @@ class SpaceStation(BaseModel):
 def main() -> None:
     print("Space Station Data Validation")
     print("=" * 40)
-    valid_station = SpaceStation(
-        station_id="ISS001",
-        name="International Space Station",
-        crew_size="6",
-        power_level=85.5,
-        oxygen_level=92.3,
-        last_maintenance=datetime.fromisoformat("2024-01-15T08:30:00"),
-        notes="routine maintenance completed",
-    )
+    data_dir = Path(__file__).parent.parent / "generated_data"
 
+    with open(data_dir / "space_stations.json") as f:
+        records = json.load(f)
+    for record in records:
+        try:
+            station = SpaceStation(**record)
+            break
+        except ValidationError:
+            continue
     print("Valid station created:")
-    print(f"ID: {valid_station.station_id}")
-    print(f"Name: {valid_station.name}")
-    print(f"Crew: {valid_station.crew_size} people")
-    print(f"Power: {valid_station.power_level}%")
-    print(f"Oxygen: {valid_station.oxygen_level}%")
-    status = "Operational" if valid_station.is_operational else "Offline"
+    print(f"ID: {station.station_id}")
+    print(f"Name: {station.name}")
+    print(f"Crew: {station.crew_size} people")
+    print(f"Power: {station.power_level}%")
+    print(f"Oxygen: {station.oxygen_level}%")
+    status = "Operational" if station.is_operational else "Offline"
     print(f"Status: {status}")
-    print("\n" + '=' * 40)
+
+    print("\n" + "=" * 40)
+    with open(data_dir / "invalid_stations.json") as f:
+        invalid_records = json.load(f)
     print("Expected validation error:")
-    try:
-        SpaceStation(
-            station_id="ISS002",
-            name="Overcrowded as hell",
-            crew_size=50,
-            power_level=25.0,
-            oxygen_level=40.0,
-            last_maintenance=datetime.fromisoformat("2024-01-15T08:30:00"),
-        )
-    except ValidationError as e:
-        print(e.errors()[0]["msg"])
+    for bad_record in invalid_records:
+        try:
+            SpaceStation(**bad_record)
+        except ValidationError as e:
+            for err in e.errors():
+                print(f"{err['loc'][0]}: {err['msg']}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
