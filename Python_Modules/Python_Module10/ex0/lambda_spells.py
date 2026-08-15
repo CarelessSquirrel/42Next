@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 artifacts_list = [
-    {'name': 'crystal', 'power': 86, 'type': 'gem'},
-    {'name': 'prismarine', 'power': 77, 'type': 'gem'}
+    {'name': 'Fire Staff', 'power': 92, 'type': 'Physical'},
+    {'name': 'Crystal Orb', 'power': 85, 'type': 'Magic'}
 ]
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
@@ -9,6 +9,9 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     return descending
 
 
-sorted_list = artifact_sorter(artifacts_list)
-for artifact in sorted_list:
-    print(artifact['power'])
+def main() -> None:
+    sa = artifact_sorter(artifacts_list)
+    print("Testing artifact sorter...")
+    print(f"{sa[0]['name']} ({sa[0]['power']} power) comes before {sa[1]['name']} ({sa[1]['power']} power)")
+
+main()
