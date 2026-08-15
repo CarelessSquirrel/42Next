@@ -6,5 +6,9 @@ artifacts_list = [
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     descending = sorted(artifacts, key=lambda a: a['power'], reverse=True)
+    return descending
 
-print(artifact_sorter(artifacts_list))
+
+sorted_list = artifact_sorter(artifacts_list)
+for artifact in artifacts_list:
+    print(artifact['power'])
