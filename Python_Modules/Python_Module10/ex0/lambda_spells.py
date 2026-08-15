@@ -10,5 +10,5 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
 
 
 sorted_list = artifact_sorter(artifacts_list)
-for artifact in artifacts_list:
+for artifact in sorted_list:
     print(artifact['power'])
