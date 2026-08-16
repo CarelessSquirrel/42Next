@@ -25,6 +25,11 @@ def power_filter(mages: list[dict], min_power: int) -> list[dict]:
     filtered = list(filter(lambda x: x['power'] >= min_power, mages))
     return filtered
 
+
+def spell_transformer(spells: list[str]) -> list[str]:
+    transformed = list(map(lambda x: "* " + x + " *", spells))
+    return transformed
+
 def main() -> None:
     sa = artifact_sorter(artifacts)
     print("Testing artifact sorter...")
@@ -33,4 +38,6 @@ def main() -> None:
     print("Filtering mages who have more than the mininum amount power")
     for mage in fm:
         print(f"{mage['name']} ({mage['power']} power)")
+    ts = spell_transformer(spells)
+    print(" ".join(ts))
 main()
