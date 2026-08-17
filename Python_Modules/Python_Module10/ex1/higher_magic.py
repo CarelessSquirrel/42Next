@@ -51,3 +51,10 @@ def conditional_caster(condition: Callable, spell: Callable) -> Callable:
 
 def spell_sequence(spells: list[Callable]) -> Callable:
     ...
+
+
+def main():
+    
+
+
+main()
