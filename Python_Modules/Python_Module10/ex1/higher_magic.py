@@ -70,9 +70,13 @@ def main():
     def strong_enough(target: str, power: int) -> bool:
         return power >= 10
     guarded = conditional_caster(strong_enough, fear)
+    print("conditional cast:")
     print(guarded(target, power))
     print(guarded(target, 5))
-
+    print()
+    sequence = spell_sequence([heal, burn, fear, comet])
+    print("spell sequence:")
+    print(sequence(target, power))
 
 
 main()
