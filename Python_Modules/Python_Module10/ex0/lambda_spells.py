@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 artifacts = [
     {'name': 'Wind Cloak', 'power': 74, 'type': 'focus'},
     {'name': 'Ice Wand', 'power': 64, 'type': 'relic'},
@@ -15,6 +16,7 @@ mages = [
 ]
 
 spells = ['meteor', 'freeze', 'earthquake', 'flash']
+
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     descending = sorted(artifacts, key=lambda a: a['power'], reverse=True)
@@ -41,13 +43,15 @@ def mage_stats(mages: list[dict]) -> dict:
         'avg_power': ranked_avg,
     }
 
+
 def main() -> None:
     print("Lambda Sanctum")
     print("=" * 40)
     sa = artifact_sorter(artifacts)
     print("Testing artifact sorter:")
-    print(f"{sa[0]['name']} ({sa[0]['power']} power) comes before {sa[1]['name']} ({sa[1]['power']} power)\n")
-    fm = power_filter(mages,40)
+    print(f"{sa[0]['name']} ({sa[0]['power']} power) "
+          f"comes before {sa[1]['name']} ({sa[1]['power']} power)\n")
+    fm = power_filter(mages, 40)
     print("Filtering mages who have more than the mininum amount power:")
     for mage in fm:
         print(f"{mage['name']} ({mage['power']} power)")
@@ -61,4 +65,6 @@ def main() -> None:
     print(f"Max power: {rm['max_power']}")
     print(f"Min power: {rm['min_power']}")
     print(f"Average power: {rm['avg_power']}")
+
+
 main()
