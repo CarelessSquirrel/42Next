@@ -58,10 +58,13 @@ def main():
     frost_enchant = enchantment_factory("Frozen")
     print(flame_enchant("Sword"))
     print(frost_enchant("Shield"))
+    print()
     store_mem = memory_vault()
+    print("Testing memory vault: ")
     print(store_mem['store']('secret', 42))
     print(store_mem['recall']('secret'))
     print(store_mem['recall']('unknown'))
 
 
-main()
+if __name__ == '__main__':
+    main()

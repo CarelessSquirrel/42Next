@@ -67,4 +67,5 @@ def main() -> None:
     print(f"Average power: {rm['avg_power']}")
 
 
-main()
+if __name__ == '__main__':
+    main()

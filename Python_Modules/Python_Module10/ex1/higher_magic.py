@@ -79,4 +79,5 @@ def main():
     print(sequence(target, power))
 
 
-main()
+if __name__ == '__main__':
+    main()
