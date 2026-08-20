@@ -57,6 +57,9 @@ def main():
     print(flame_enchant("Sword"))
     print(frost_enchant("Shield"))
     store_mem = memory_vault()
-    print(store_mem('secret', 42))
-    
+    print(store_mem['store']('secret', 42))
+    print(store_mem['recall']('secret'))
+    print(store_mem['recall']('unknown'))
+
+
 main()
