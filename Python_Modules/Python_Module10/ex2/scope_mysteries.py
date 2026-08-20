@@ -7,9 +7,16 @@ def mage_counter() -> Callable:
     def counter() -> int:
         nonlocal tracker
         tracker += 1
-    counter()
-    return tracker
+        return tracker
+    return counter
 
-mage_counter()
-mage_counter()
-print(mage_counter())
+
+def main():
+    print("Testing mage counter:")
+    counter_a = mage_counter()
+    for call_num in range(1, 3):
+        print(f"counter_a call: {call_num}: {counter_a()}")
+    counter_b = mage_counter()
+    print(f"counter_b call 1: {counter_b()}")
+
+main()
