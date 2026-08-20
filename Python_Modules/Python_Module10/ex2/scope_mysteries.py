@@ -23,16 +23,20 @@ def spell_accumulator(initial_power: int) -> Callable:
 def enchantment_factory(enchantment_type: str) -> Callable:
     def apply(item:str) -> str:
         return f"{enchantment_type} {item}"
+
     return apply
 
 
 def memory_vault() -> dict[str, Callable]:
-    def store(key, value):
-       return f"'{key}' '{value}'"
-    return store
+    memory = {}
 
-    def recall(key):
-        ...
+    def store(key: str, value) -> None:
+       memory[key] = value
+
+    def recall(key: str):
+        return memory.get(key, "Memory not found")
+
+    return {'store': store, 'recall': recall}
 
 
 def main():
@@ -54,5 +58,5 @@ def main():
     print(frost_enchant("Shield"))
     store_mem = memory_vault()
     print(store_mem('secret', 42))
-
+    
 main()
