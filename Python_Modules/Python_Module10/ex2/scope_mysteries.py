@@ -11,6 +11,16 @@ def mage_counter() -> Callable:
     return counter
 
 
+def spell_accumulator(initial_power: int) -> Callable:
+    add = 10
+    def additions():
+        nonlocal add
+        add += 10
+        total = add + initial_power
+        return total
+    return additions
+
+
 def main():
     print("Testing mage counter:")
     counter_a = mage_counter()
@@ -18,5 +28,8 @@ def main():
         print(f"counter_a call: {call_num}: {counter_a()}")
     counter_b = mage_counter()
     print(f"counter_b call 1: {counter_b()}")
-
+    accumulator = spell_accumulator(100)
+    print(accumulator())
+    print(accumulator())
+    print(accumulator())
 main()
