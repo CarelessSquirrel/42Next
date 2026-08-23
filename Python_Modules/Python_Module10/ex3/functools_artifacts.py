@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+from collections.abc import Callable
+from typing import Any
+
+
 def spell_recucer(spells: list[int], operations: str) -> int:
     ...
 
