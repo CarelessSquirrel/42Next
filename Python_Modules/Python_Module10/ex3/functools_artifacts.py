@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 import functools
 from collections.abc import Callable
 from typing import Any
@@ -46,4 +47,6 @@ def main():
     print(sr)
     enchanters = partial_enchanter(enchant)
     print(enchanters['fire'](target='Sword'))
+    print(enchanters['lightning'](target='Hammer'))
+    print(enchanters['ice'](target='Staff'))
 main()
