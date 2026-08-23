@@ -34,9 +34,11 @@ def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
         'lightning': functools.partial(base_enchantment, power=50, element='lightning'),
     }
 
-
+@functools.lru_cache
 def memoized_fibonacci(n: int) -> int:
-    ...
+    if n <= 1:
+        return n
+    return memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
 
 
 def spell_dispatcher() -> Callable[[Any], str]:
