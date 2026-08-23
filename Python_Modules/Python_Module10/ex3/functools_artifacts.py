@@ -13,6 +13,10 @@ operation_map = {
     'min': min,
 }
 
+def enchant(power: int, element: str, target: str) -> str:
+    return f"{element} enchantment ({power}) applied to {target}"
+
+
 def spell_reducer(spells: list[int], operation: str) -> int:
     if not spells:
         return 0
@@ -22,9 +26,12 @@ def spell_reducer(spells: list[int], operation: str) -> int:
 
 
 
-
-def partial_enchancer(base_enchantment: Callable) -> dict[str, Callable]:
-    ...
+def partial_enchanter(base_enchantment: Callable) -> dict[str, Callable]:
+    return {
+        'fire': functools.partial(base_enchantment, power=50, element='fire'),
+        'ice': functools.partial(base_enchantment, power=50, element='ice'),
+        'lightning': functools.partial(base_enchantment, power=50, element='lightning'),
+    }
 
 
 def memoized_fibonacci(n: int) -> int:
@@ -37,5 +44,6 @@ def spell_dispatcher() -> Callable[[Any], str]:
 def main():
     sr = spell_reducer(spells, "add")
     print(sr)
-
+    enchanters = partial_enchanter(enchant)
+    print(enchanters['fire'](target='Sword'))
 main()
