@@ -4,6 +4,7 @@ from collections.abc import Callable
 from typing import Any
 import operator
 
+spells = [10, 20, 30]
 
 operation_map = {
     'add': operator.add,
@@ -15,7 +16,7 @@ operation_map = {
 def spell_reducer(spells: list[int], operation: str) -> int:
     if not spells:
         return 0
-    if operation not operation_map:
+    if operation not in operation_map:
         raise ValueError(f"Unknown operation: {operation}")
     return functools.reduce(operation_map[operation], spells)
 
@@ -32,3 +33,9 @@ def memoized_fibonacci(n: int) -> int:
 
 def spell_dispatcher() -> Callable[[Any], str]:
     ...
+
+def main():
+    sr = spell_reducer(spells, "add")
+    print(sr)
+
+main()
