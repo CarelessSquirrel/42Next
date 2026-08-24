@@ -4,15 +4,6 @@ import functools
 from collections.abc import Callable
 import time
 
-class MageGuild:
-    @staticmethod
-    def validate_mage_name(name: str) -> bool:
-        return len(name) >= 3 and all(c.isalpha() or c == ' ' for c in name)
-
-
-    def cast_spell(self, spell_name: str, power: int) -> str:
-        ...
-
 
 def spell_timer(func: Callable) -> Callable:
     @functools.wraps(func)
@@ -81,6 +72,16 @@ def make_halfway_spell() -> Callable:
     return halfway_spell
 
 
+class MageGuild:
+    @staticmethod
+    def validate_mage_name(name: str) -> bool:
+        return len(name) >= 3 and all(c.isalpha() or c == ' ' for c in name)
+
+    @power_validator(10)
+    def cast_spell(self, spell_name: str, power: int) -> str:
+        return f"Sucessfully cast {spell_name} with {power} power"
+
+
 def main() -> None:
     print(fireball('dragon', 15))
     print('=' * 40)
@@ -91,6 +92,12 @@ def main() -> None:
     print('=' * 40)
     hway = make_halfway_spell()
     print(hway('dragon', 15))
+    print('=' * 40)
+    guild = MageGuild()
+    print(MageGuild.validate_mage_name('Fire Mage'))
+    print(MageGuild.validate_mage_name('M1'))
+    print(guild.cast_spell('Lightning', 15))
+    print(guild.cast_spell('Lightning', 5))
 
 
 if __name__ == '__main__':
