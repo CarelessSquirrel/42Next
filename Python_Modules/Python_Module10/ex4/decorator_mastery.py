@@ -30,7 +30,15 @@ def fireball(target: str, power: int) -> str:
 
 
 def power_validator(min_power: int) -> Callable:
-    ...
+    def decorator(func: Callable) -> Callable:
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            power = kwargs.get('power', args[-1] if args else None)
+            if power is not None and power >= min_power:
+                return func(*args, **kwargs)
+            return "Insufficient power for this spell"
+        return wrapper
+    return decorator
 
 
 def retry_spell(max_attempts: int) -> Callable:
