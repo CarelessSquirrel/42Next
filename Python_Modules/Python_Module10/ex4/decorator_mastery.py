@@ -49,7 +49,9 @@ def retry_spell(max_attempts: int) -> Callable:
                     return func(*args, **kwargs)
                 except Exception:
                     if attempt < max_attempts:
-                        print(f"Spell failed, retrying.. (attempt {attempt}/{max_attempts})")
+                        print(
+                            f"Spell failed, retrying.. "
+                            f"(attempt {attempt}/{max_attempts})")
             return f"Spell casting failed after {max_attempts} attempts"
         return wrapper
     return decorator
@@ -62,6 +64,7 @@ def failing_spell(target: str, power: int) -> str:
 
 def make_halfway_spell() -> Callable:
     attempts = 0
+
     @retry_spell(3)
     def halfway_spell(target: str, power: int) -> str:
         nonlocal attempts
