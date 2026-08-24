@@ -56,7 +56,7 @@ def spell_dispatcher() -> Callable[[Any], str]:
 
     @cast.register(list)
     def _(spell: list) -> str:
-        return f"Multi-cast: {len(spell) spells}"
+        return f"Multi-cast: {len(spell)} spells"
 
     return cast
 
@@ -81,4 +81,6 @@ def main():
     print(dispatcher([1, 2, 3]))
     print(dispatcher(4.2))
 
-main()
+
+if __name__ == '__main__':
+    main()
