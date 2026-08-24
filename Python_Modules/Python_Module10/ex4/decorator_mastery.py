@@ -7,10 +7,12 @@ import time
 class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
-        ...
+        return len(name) >= 3 and all(c.isalpha() or c == ' ' for c in name)
+
 
     def cast_spell(self, spell_name: str, power: int) -> str:
         ...
+
 
 def spell_timer(func: Callable) -> Callable:
     @functools.wraps(func)
@@ -22,6 +24,7 @@ def spell_timer(func: Callable) -> Callable:
         print(f"Spell completed in {elapsed:.3f} seconds")
         return result
     return wrapper
+
 
 @spell_timer
 def fireball(target: str, power: int) -> str:
@@ -40,9 +43,11 @@ def power_validator(min_power: int) -> Callable:
         return wrapper
     return decorator
 
+
 @power_validator(10)
 def lightning_bolt(target: str, power: int) -> str:
     return f"Lighting bolt strikes {target} for {power} damage"
+
 
 def retry_spell(max_attempts: int) -> Callable:
     def decorator(func: Callable) -> Callable:
@@ -62,6 +67,7 @@ def retry_spell(max_attempts: int) -> Callable:
 @retry_spell(3)
 def failing_spell(target: str, power: int) -> str:
     raise RuntimeError("This spell always fails")
+
 
 def make_halfway_spell() -> Callable:
     attempts = 0
@@ -85,4 +91,7 @@ def main() -> None:
     print('=' * 40)
     hway = make_halfway_spell()
     print(hway('dragon', 15))
-main()
+
+
+if __name__ == '__main__':
+    main()
