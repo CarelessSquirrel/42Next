@@ -19,9 +19,15 @@ def spell_timer(func: Callable) -> Callable:
         start = time.time()
         result = func(*args, **kwargs)
         elapsed = time.time() - start
-        print(f"Spell completed in {elapsed} seconds")
+        print(f"Spell completed in {elapsed:.3f} seconds")
         return result
     return wrapper
+
+@spell_timer
+def fireball(target: str, power: int) -> str:
+    time.sleep(0.1)
+    return f"Fireball hits {target} for {power} damage"
+
 
 def power_validator(min_power: int) -> Callable:
     ...
@@ -31,6 +37,6 @@ def retry_spell(max_attempts: int) -> Callable:
     ...
 
 def main() -> None:
-    timer = spell_timer()
+    print(fireball('dragon', 15))
 
 main()
