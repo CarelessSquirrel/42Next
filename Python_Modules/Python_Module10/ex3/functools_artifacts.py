@@ -42,7 +42,23 @@ def memoized_fibonacci(n: int) -> int:
 
 
 def spell_dispatcher() -> Callable[[Any], str]:
-    ...
+    @functools.singledispatch
+    def cast(spell: Any) -> str:
+        return "Unknown spell type"
+
+    @cast.register(int)
+    def _(spell: int) -> str:
+        return f"{spell} damage"
+
+    @cast.register(str)
+    def _(spell: str) -> str:
+        return f"Enchantment: {spell}"
+
+    @cast.register(list)
+    def _(spell: list) -> str:
+        return f"Multi-cast: {len(spell) spells}"
+
+    return cast
 
 def main():
     sr = spell_reducer(spells, "add")
@@ -59,4 +75,10 @@ def main():
     print(fib)
     fib = memoized_fibonacci(15)
     print(fib)
+    dispatcher = spell_dispatcher()
+    print(dispatcher(42))
+    print(dispatcher('fireball'))
+    print(dispatcher([1, 2, 3]))
+    print(dispatcher(4.2))
+
 main()
