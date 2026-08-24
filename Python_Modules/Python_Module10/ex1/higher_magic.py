@@ -7,10 +7,6 @@ test_values = [5, 10, 16]
 test_targets = ['Dragon', 'Goblin', 'Wizard', 'Knight']
 
 
-def spell(target: str, power: int) -> str:
-    ...
-
-
 def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
@@ -52,11 +48,12 @@ def conditional_caster(condition: Callable, spell: Callable) -> Callable:
 
 
 def spell_sequence(spells: list[Callable]) -> Callable:
-    def cast(target: str, power: int) -> str:
+    def cast(target: str, power: int) -> list[str]:
         return [s(target, power) for s in spells]
     return cast
 
-def main():
+
+def main() -> None:
     target = test_targets[0]
     power = test_values[1]
     print("spell combiner:")
@@ -67,8 +64,10 @@ def main():
     print("amplifier:")
     print(mega_comet(target, power))
     print()
+
     def strong_enough(target: str, power: int) -> bool:
         return power >= 10
+
     guarded = conditional_caster(strong_enough, fear)
     print("conditional cast:")
     print(guarded(target, power))
